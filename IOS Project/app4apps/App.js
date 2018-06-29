@@ -148,15 +148,16 @@ import React from 'react'
 import { StyleSheet, Platform, Image, Text, View } from 'react-native'
 import { SwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 // import the different screens
-import Loading from './loginScreen/Loading'
-import SignUp from './loginScreen/SignUp'
-import Login from './loginScreen/Login'
-import Main from './loginScreen/Main'
+import Loading from './screens/login/Loading'
+import SignUp from './screens/login/SignUp'
+import Login from './screens/login/Login'
+import Main from './screens/login/Main'
 import Schools from './screens/Schools'
 import Experiences from './screens/Experiences'
 import Me from './screens/Me'
 // create our app's navigation stack
 
+//for me
 const Apps = SwitchNavigator(
   {
     Loading,
@@ -168,6 +169,8 @@ const Apps = SwitchNavigator(
     initialRouteName: 'Loading'
   }
 )
+
+//tab
 export const App = createBottomTabNavigator({
   Schools: {screen: Schools},
   Experiences: {screen: Experiences},
