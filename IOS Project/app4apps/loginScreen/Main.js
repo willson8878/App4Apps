@@ -48,7 +48,6 @@ export default class Main extends React.Component {
           Hi {currentUser && currentUser.email}!
         </Text>
         <Button title="Logout" onPress={this.handleLogout} />
-        //<Button title="see school" onPress={()=>navigate('Schools')} />
       </View>
     )
   }
