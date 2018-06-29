@@ -146,22 +146,32 @@
 
 import React from 'react'
 import { StyleSheet, Platform, Image, Text, View } from 'react-native'
-import { SwitchNavigator } from 'react-navigation'
+import { SwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 // import the different screens
 import Loading from './src_js/Loading'
 import SignUp from './src_js/SignUp'
 import Login from './src_js/Login'
 import Main from './src_js/Main'
+import Schools from './screens/Schools'
+import Experiences from './screens/Experiences'
+import Me from './screens/Me'
 // create our app's navigation stack
-const App = SwitchNavigator(
+
+const Apps = SwitchNavigator(
   {
     Loading,
     SignUp,
     Login,
-    Main
+    Main,
   },
   {
     initialRouteName: 'Loading'
   }
 )
+export const App = createBottomTabNavigator({
+  Schools: {screen: Schools},
+  Experiences: {screen: Experiences},
+  Me: {screen: Apps},
+});
+
 export default App

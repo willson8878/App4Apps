@@ -2,6 +2,7 @@
 import React from 'react'
 import { StyleSheet, Platform, Image, Text, View, Button } from 'react-native'
 import firebase from 'firebase';
+import { SwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 
 export default class Main extends React.Component {
   state = { currentUser: null }
@@ -40,12 +41,14 @@ export default class Main extends React.Component {
 
   render() {
     const { currentUser } = this.state
+    const { navigate } = this.props.navigation;
     return (
       <View style={styles.container}>
         <Text>
           Hi {currentUser && currentUser.email}!
         </Text>
         <Button title="Logout" onPress={this.handleLogout} />
+        //<Button title="see school" onPress={()=>navigate('Schools')} />
       </View>
     )
   }
