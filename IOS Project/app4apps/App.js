@@ -183,6 +183,33 @@ export const App = createBottomTabNavigator({
   Experiences: {screen: Experiences},
   Me: {screen: Apps},
 },
+{
+  navigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, tintColor }) => {
+      const { routeName } = navigation.state;
+      let iconName;
+      if (routeName === 'Schools') {
+        iconName = `ios-list-box${focused ? '' : ''}`;
+      } else if (routeName === 'Experiences') {
+        iconName = `ios-chatboxes${focused ? '' : ''}`;
+      } else if (routeName === 'Me') {
+        iconName = `ios-contact${focused ? '' : ''}`;
+      }
+
+      // You can return any component that you like here! We usually use an
+      // icon component from react-native-vector-icons
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }),
+  tabBarPosition: 'bottom',
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+    labelStyle: {fontSize: 13,},
+  },
+  animationEnabled: false,
+  swipeEnabled: false,
+}
 );
 
 export default App
