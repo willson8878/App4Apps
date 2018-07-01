@@ -144,9 +144,16 @@
 //   },
 // });
 
+//ignore a warning which is a bug from reactive-navigator
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+
+//import libraries
 import React from 'react'
 import { StyleSheet, Platform, Image, Text, View } from 'react-native'
-import { SwitchNavigator, createBottomTabNavigator } from 'react-navigation'
+import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+
 // import the different screens
 import Loading from './screens/login/Loading'
 import SignUp from './screens/login/SignUp'
@@ -158,7 +165,7 @@ import Me from './screens/Me'
 // create our app's navigation stack
 
 //for me
-const Apps = SwitchNavigator(
+const Apps = createSwitchNavigator(
   {
     Loading,
     SignUp,
@@ -172,9 +179,10 @@ const Apps = SwitchNavigator(
 
 //tab
 export const App = createBottomTabNavigator({
-  Schools: {screen: Schools},
+  Schools: {screen: Schools,},
   Experiences: {screen: Experiences},
   Me: {screen: Apps},
-});
+},
+);
 
 export default App
