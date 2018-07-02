@@ -1,7 +1,13 @@
 // Login.js
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import { StyleSheet, Text, View } from 'react-native'
 import firebase from 'firebase';
+
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { Input, Button } from 'react-native-elements';
+
+<Input  placeholder='BASIC INPUT'/>
+
 
 export default class Login extends React.Component {
   state = { email: '', password: '', errorMessage: null }
@@ -26,29 +32,35 @@ export default class Login extends React.Component {
 
   render() {
     return (
+      
       <View style={styles.container}>
-        <Text>Login</Text>
+        <Text style = {styles.text_login}>Login</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
-        <TextInput
+        <Input
           style={styles.textInput}
           autoCapitalize="none"
           placeholder="Email"
+          leftIcon={{ type: 'font-awesome', name: 'envelope' }}
           onChangeText={email => this.setState({ email })}
           value={this.state.email}
         />
-        <TextInput
+        <Input
           secureTextEntry
           style={styles.textInput}
           autoCapitalize="none"
           placeholder="Password"
           onChangeText={password => this.setState({ password })}
           value={this.state.password}
+          leftIcon={{ type: 'font-awesome', name: 'lock' }}
         />
-        <Button title="Login" onPress={this.handleLogin} />
-        <Button
+        
+        <Button raised title="Login" onPress={this.handleLogin} />
+        <Button 
+          raised
+          style={styles.butt_signup}
           title="Don't have an account? Sign Up"
           onPress={() => this.props.navigation.navigate('SignUp')}
         />
@@ -59,14 +71,16 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
+  text_login:{
+    fontFamily: 'Iowan Old Style',
+    fontWeight: 'bold',
+    fontSize: 25,
+    marginTop: 100
+  },
+  butt_signup: {
+    marginBottom: 150,    
   }
 })

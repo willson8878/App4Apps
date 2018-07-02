@@ -1,6 +1,8 @@
 // SignUp.js
 import React from 'react'
-import { StyleSheet, Text, TextInput, View, Button } from 'react-native'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
+import { Input, Button } from 'react-native-elements';
+
 import firebase from 'firebase';
 
 export default class SignUp extends React.Component {
@@ -25,28 +27,31 @@ handleSignUp = () => {
 render() {
     return (
       <View style={styles.container}>
-        <Text>Sign Up</Text>
+        <Text style = {styles.text_SignUp}>Sign Up</Text>
         {this.state.errorMessage &&
           <Text style={{ color: 'red' }}>
             {this.state.errorMessage}
           </Text>}
-        <TextInput
+        <Input
           placeholder="Email"
           autoCapitalize="none"
           style={styles.textInput}
           onChangeText={email => this.setState({ email })}
+          leftIcon={{ type: 'font-awesome', name: 'envelope' }}
           value={this.state.email}
         />
-        <TextInput
+        <Input
           secureTextEntry
           placeholder="Password"
           autoCapitalize="none"
           style={styles.textInput}
           onChangeText={password => this.setState({ password })}
+          leftIcon={{ type: 'font-awesome', name: 'lock' }}
           value={this.state.password}
         />
         <Button title="Sign Up" onPress={this.handleSignUp} />
         <Button
+          style={styles.butt_login}
           title="Already have an account? Login"
           onPress={() => this.props.navigation.navigate('Login')}
         />
@@ -57,14 +62,16 @@ render() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center'
   },
-  textInput: {
-    height: 40,
-    width: '90%',
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginTop: 8
+  text_SignUp:{
+    fontFamily: 'Iowan Old Style',
+    fontWeight: 'bold',
+    fontSize: 25,
+    marginTop: 100
+  },
+  butt_login: {
+    marginBottom: 150,    
   }
 })

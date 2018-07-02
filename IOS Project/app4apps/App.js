@@ -150,7 +150,6 @@ YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTIm
 
 //import libraries
 import React from 'react'
-import { StyleSheet, Platform, Image, Text, View } from 'react-native'
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
@@ -161,7 +160,6 @@ import Login from './screens/login/Login'
 import Main from './screens/login/Main'
 import Schools from './screens/Schools'
 import Experiences from './screens/Experiences'
-import Me from './screens/Me'
 // create our app's navigation stack
 
 //for me
