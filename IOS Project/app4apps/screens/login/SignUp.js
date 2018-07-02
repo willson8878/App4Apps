@@ -49,8 +49,18 @@ render() {
           leftIcon={{ type: 'font-awesome', name: 'lock' }}
           value={this.state.password}
         />
-        <Button title="Sign Up" onPress={this.handleSignUp} />
+        <Button 
+          raised
+          title="Sign Up" 
+          buttonStyle = {{
+            backgroundColor: 'tomato'
+          }}
+          onPress={this.handleSignUp} />
         <Button
+          raised
+          buttonStyle = {{
+            backgroundColor: 'tomato'
+          }}
           style={styles.butt_login}
           title="Already have an account? Login"
           onPress={() => this.props.navigation.navigate('Login')}

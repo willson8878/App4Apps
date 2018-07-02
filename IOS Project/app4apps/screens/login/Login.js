@@ -57,10 +57,19 @@ export default class Login extends React.Component {
           leftIcon={{ type: 'font-awesome', name: 'lock' }}
         />
         
-        <Button raised title="Login" onPress={this.handleLogin} />
+        <Button 
+          raised 
+          title="Login" 
+          buttonStyle = {{
+            backgroundColor: 'tomato'
+          }}
+          onPress={this.handleLogin} />
         <Button 
           raised
           style={styles.butt_signup}
+          buttonStyle = {{
+            backgroundColor: 'tomato'
+          }}
           title="Don't have an account? Sign Up"
           onPress={() => this.props.navigation.navigate('SignUp')}
         />
