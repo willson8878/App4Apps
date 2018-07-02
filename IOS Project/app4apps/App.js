@@ -1,4 +1,4 @@
-// 
+//
 // import React, { Component } from 'react';
 // import { View, Text, Button, StyleSheet, TextInput} from 'react-native';
 // import { createStackNavigator } from 'react-navigation';
@@ -144,15 +144,12 @@
 //   },
 // });
 
-<<<<<<< HEAD
 
-=======
-//ignore a warning which is a bug from reactive-navigator
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 
 //import libraries
->>>>>>> 0595fd2a6be9d7db71a0e901f18cc4b4eb6a9485
+
 import React from 'react'
 import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
