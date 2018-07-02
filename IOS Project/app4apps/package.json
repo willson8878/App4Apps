@@ -13,8 +13,12 @@
     "@firebase/polyfill": "^0.3.3",
     "firebase": "^5.1.0",
     "react": "16.3.1",
-    "react-native": "0.55.4",
-    "react-navigation": "^2.5.3"
+    "react-native": "^0.55.4",
+    "react-native-elements": "^1.0.0-beta5",
+    "react-native-navigation": "^1.1.473",
+    "react-native-vector-icons": "^4.6.0",
+    "react-navigation": "^2.5.5",
+    "react-navigation-material-bottom-tabs": "^0.3.0"
   },
   "devDependencies": {
     "babel-jest": "23.2.0",

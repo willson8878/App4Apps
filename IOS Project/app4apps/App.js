@@ -144,10 +144,19 @@
 //   },
 // });
 
+<<<<<<< HEAD
 
+=======
+//ignore a warning which is a bug from reactive-navigator
+import { YellowBox } from 'react-native';
+YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
+
+//import libraries
+>>>>>>> 0595fd2a6be9d7db71a0e901f18cc4b4eb6a9485
 import React from 'react'
-import { StyleSheet, Platform, Image, Text, View } from 'react-native'
-import { SwitchNavigator, createBottomTabNavigator } from 'react-navigation'
+import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
+import Ionicons from 'react-native-vector-icons/Ionicons'
+
 // import the different screens
 import Loading from './screens/login/Loading'
 import SignUp from './screens/login/SignUp'
@@ -155,11 +164,10 @@ import Login from './screens/login/Login'
 import Main from './screens/login/Main'
 import Schools from './screens/Schools'
 import Experiences from './screens/Experiences'
-import Me from './screens/Me'
 // create our app's navigation stack
 
 //for me
-const Apps = SwitchNavigator(
+const Apps = createSwitchNavigator(
   {
     Loading,
     SignUp,
@@ -173,9 +181,37 @@ const Apps = SwitchNavigator(
 
 //tab
 export const App = createBottomTabNavigator({
-  Schools: {screen: Schools},
+  Schools: {screen: Schools,},
   Experiences: {screen: Experiences},
   Me: {screen: Apps},
-});
+},
+{
+  navigationOptions: ({ navigation }) => ({
+    tabBarIcon: ({ focused, tintColor }) => {
+      const { routeName } = navigation.state;
+      let iconName;
+      if (routeName === 'Schools') {
+        iconName = `ios-list-box${focused ? '' : ''}`;
+      } else if (routeName === 'Experiences') {
+        iconName = `ios-chatboxes${focused ? '' : ''}`;
+      } else if (routeName === 'Me') {
+        iconName = `ios-contact${focused ? '' : ''}`;
+      }
+
+      // You can return any component that you like here! We usually use an
+      // icon component from react-native-vector-icons
+      return <Ionicons name={iconName} size={25} color={tintColor} />;
+    },
+  }),
+  tabBarPosition: 'bottom',
+  tabBarOptions: {
+    activeTintColor: 'tomato',
+    inactiveTintColor: 'gray',
+    labelStyle: {fontSize: 13,},
+  },
+  animationEnabled: false,
+  swipeEnabled: false,
+}
+);
 
 export default App
