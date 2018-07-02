@@ -1,4 +1,4 @@
-//
+// 
 // import React, { Component } from 'react';
 // import { View, Text, Button, StyleSheet, TextInput} from 'react-native';
 // import { createStackNavigator } from 'react-navigation';
@@ -143,6 +143,7 @@
 //     height:40,
 //   },
 // });
+
 
 import React from 'react'
 import { StyleSheet, Platform, Image, Text, View } from 'react-native'
