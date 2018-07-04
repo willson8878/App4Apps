@@ -9,7 +9,7 @@ export default class Experiences_edit extends Component {
   static navigationOptions = {
     title: 'me',
   };
-  state = { currentUser: null, data:null }
+  state = { currentUser: null, data:null, uid:null }
   handleLogout = () => {
     firebase
       .auth()
@@ -21,6 +21,7 @@ export default class Experiences_edit extends Component {
     const { currentUser } = firebase.auth()
     this.setState({ currentUser })
     var userID=firebase.auth().currentUser.uid;
+    this.setState({uid:userID});
     var database=firebase.database();
     var fet=database.ref('UID/'+userID)
                      .once('value')
@@ -52,18 +53,18 @@ export default class Experiences_edit extends Component {
 
           <View>
             <Text style={{fontSize:20}}>
-              UID: {currentUser && currentUser.uid}
+              UID: {this.state.uid}
             </Text>
           </View>
 
           <View>
-            <Button title="my experience" onPress={() => this.props.navigation.navigate('Experiences_edit')} />
+            <Button title="show experience" onPress={() => this.props.navigation.navigate('Experiences_show')} />
           </View>
           <View>
-            <Button title="my Profile" onPress={() => this.props.navigation.navigate('Experiences_edit')} />
+            <Button title="edit experience" onPress={() => this.props.navigation.navigate('Experiences_edit')} />
           </View>
           <View>
-            <Button title="my Q&A" onPress={() => this.props.navigation.navigate('Experiences_edit')} />
+            <Button title="my Q&A" onPress={() => this.props.navigation.navigate('Experiences_show')} />
           </View>
         </View>
 

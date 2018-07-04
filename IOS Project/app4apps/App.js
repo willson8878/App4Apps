@@ -162,8 +162,10 @@ import Login from './screens/login/Login'
 import Main from './screens/login/Main'
 import Schools from './screens/Schools'
 import Experiences from './screens/Experiences'
+import Experiences_show from './screens/me/Experiences_show'
 import Experiences_edit from './screens/me/Experiences_edit'
-import Resume from './screens/me/Resume'
+import markDownEditor from './screens/me/markDownEditor'
+import Profile from './screens/me/Profile'
 import me_Main from './screens/me/me_Main'
 // create our app's navigation stack
 
@@ -172,8 +174,10 @@ import me_Main from './screens/me/me_Main'
 const me_control = createStackNavigator(
   {
   me_Main,
+  Experiences_show,
   Experiences_edit,
-  Resume
+  Profile,
+  markDownEditor,
 
   }
 )
