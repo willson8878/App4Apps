@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, Header,SearchBar } from 'react-native-elements';
+//import HBRichTextEditor from 'react-native-richtext-editor/HBRichTextEditor';
 
 export default class Experiences extends Component {
   render(){
@@ -11,7 +12,7 @@ export default class Experiences extends Component {
         centerComponent={{ text: 'EXP & QA', style: { color: '#fff' },  fontSize: 10}}
         backgroundColor = 'tomato'
       />
-      
+
     </View>
     );
   }
