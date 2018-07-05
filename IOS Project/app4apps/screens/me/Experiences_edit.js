@@ -61,7 +61,6 @@ export default class Experiences_edit extends Component {
     //   <Button title="Main" onPress={() => this.props.navigation.navigate('Main')} />
     // </View>
     <View style={{flex:0.7}}>
-    <MarkdownEditor onMarkdownChange={(markDown) => this.setState({markDown})}/>
       <View>
 
       <TextInput
@@ -74,6 +73,14 @@ export default class Experiences_edit extends Component {
         {this.state.markDown}
       </MarkdownView>
 
+      <Button
+         raised
+         title="copy the markDown text yourself and open a embedeed markDown editor"
+         buttonStyle = {{
+           backgroundColor: 'tomato'
+          }}
+          onPress={()=>this.props.navigation.navigate('markDownEditor')}
+          />
       <Button
          raised
          title="save and submit"

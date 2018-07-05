@@ -60,10 +60,12 @@ export default class Experiences_edit extends Component {
     //
     //   <Button title="Main" onPress={() => this.props.navigation.navigate('Main')} />
     // </View>
-    <View style={{flex:0.7}}>
+    <View style={{flex:0.9}}>
     <MarkdownEditor onMarkdownChange={(markDown) => this.setState({markDown})}/>
       <View>
-
+      <Text>
+        Saved experience markDown text (need copy):
+      </Text>
       <TextInput
           style={{height: 40}}
           value={this.state.markDown}

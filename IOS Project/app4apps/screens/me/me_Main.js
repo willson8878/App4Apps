@@ -61,7 +61,7 @@ export default class Experiences_edit extends Component {
             <Button title="show experience" onPress={() => this.props.navigation.navigate('Experiences_show')} />
           </View>
           <View>
-            <Button title="edit experience" onPress={() => this.props.navigation.navigate('Experiences_edit')} />
+            <Button title="edit experience" onPress={() => this.props.navigation.navigate('markDownEditor')} />
           </View>
           <View>
             <Button title="my Q&A" onPress={() => this.props.navigation.navigate('Experiences_show')} />
