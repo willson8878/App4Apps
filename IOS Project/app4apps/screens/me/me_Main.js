@@ -53,22 +53,48 @@ export default class Experiences_edit extends Component {
 
 
           <View>
-            <Button title="show experience" onPress={() => this.props.navigation.navigate('Experiences_show')} />
-            <Button title="edit experience" onPress={() => this.props.navigation.navigate('markDownEditor')} />
-            <Button title="my profile" onPress={() => this.props.navigation.navigate('Profile')} />
-            <Button title="my Q&A" onPress={() => this.props.navigation.navigate('Experiences_show')} />
+            <Button
+
+                buttonStyle = {{
+                  backgroundColor: 'tomato'
+                }}
+                title="show experience"
+                onPress={() => this.props.navigation.navigate('Experiences_show')} />
           </View>
           <View>
-
+            <Button
+              buttonStyle = {{
+                backgroundColor: 'tomato'
+              }}
+              title="edit experience"
+              onPress={() => this.props.navigation.navigate('markDownEditor')} />
           </View>
           <View>
-
+            <Button
+            buttonStyle = {{
+              backgroundColor: 'tomato'
+            }}
+            title="my profile"
+            onPress={() => this.props.navigation.navigate('Profile')} />
+          </View>
+          <View>
+            <Button
+            buttonStyle = {{
+              backgroundColor: 'tomato'
+            }}
+            title="my Q&A"
+            onPress={() => this.props.navigation.navigate('Experiences_show')} />
           </View>
         </View>
 
 
         <View>
-          <Button title="Logout" onPress={this.handleLogout} />
+          <Button
+          buttonStyle = {{
+            backgroundColor: 'tomato'
+          }}
+          title="Logout"
+          onPress={this.handleLogout} />
         </View>
 
       </View>
