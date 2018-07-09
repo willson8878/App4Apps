@@ -26,13 +26,13 @@ export default class Login extends React.Component {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, password)
-      .then(() => this.props.navigation.navigate('Main'))
+      .then(() => this.props.navigation.navigate('me_Main'))
       .catch(error => this.setState({ errorMessage: error.message }))
   }
 
   render() {
     return (
-      
+
       <View style={styles.container}>
         <Text style = {styles.text_login}>Login</Text>
         {this.state.errorMessage &&
@@ -57,15 +57,14 @@ export default class Login extends React.Component {
           leftIcon={{ type: 'font-awesome', name: 'lock' }}
         />
 
-        
-        <Button 
-          raised 
-          title="Login" 
+        <Button
+          raised
+          title="Login"
           buttonStyle = {{
             backgroundColor: 'tomato'
           }}
           onPress={this.handleLogin} />
-        <Button 
+        <Button
           raised
           style={styles.butt_signup}
           buttonStyle = {{
@@ -91,6 +90,6 @@ const styles = StyleSheet.create({
     marginTop: 100
   },
   butt_signup: {
-    marginBottom: 150,    
+    marginBottom: 150,
   }
 })

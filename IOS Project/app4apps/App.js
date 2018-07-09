@@ -144,13 +144,15 @@
 //   },
 // });
 
-//ignore a warning which is a bug from reactive-navigator
+
 import { YellowBox } from 'react-native';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
-
+//import {RichTextEditor, RichTextToolbar} from 'react-native-zss-rich-text-editor';
+//import WebViewBridge from 'react-native-webview-bridge';
 //import libraries
+
 import React from 'react'
-import { createSwitchNavigator, createBottomTabNavigator } from 'react-navigation'
+import { createSwitchNavigator, createBottomTabNavigator,createStackNavigator } from 'react-navigation'
 import Ionicons from 'react-native-vector-icons/Ionicons'
 
 // import the different screens
@@ -160,8 +162,25 @@ import Login from './screens/login/Login'
 import Main from './screens/login/Main'
 import Schools from './screens/Schools'
 import Experiences from './screens/Experiences'
+import Experiences_show from './screens/me/Experiences_show'
+import Experiences_edit from './screens/me/Experiences_edit'
+import markDownEditor from './screens/me/markDownEditor'
+import Profile from './screens/me/Profile'
+import me_Main from './screens/me/me_Main'
 // create our app's navigation stack
 
+
+
+const me_control = createStackNavigator(
+  {
+  me_Main,
+  Experiences_show,
+  Experiences_edit,
+  Profile,
+  markDownEditor,
+
+  }
+)
 //for me
 const Apps = createSwitchNavigator(
   {
@@ -169,11 +188,13 @@ const Apps = createSwitchNavigator(
     SignUp,
     Login,
     Main,
+    me_control:{screen: me_control}
   },
   {
     initialRouteName: 'Loading'
   }
 )
+
 
 //tab
 export const App = createBottomTabNavigator({

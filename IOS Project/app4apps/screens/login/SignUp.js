@@ -21,7 +21,7 @@ handleSignUp = () => {
   firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => this.props.navigation.navigate('Main'))
+      .then(() => this.props.navigation.navigate('me_Main'))
       .catch(error => this.setState({ errorMessage: error.message }))
 }
 render() {
@@ -49,9 +49,9 @@ render() {
           leftIcon={{ type: 'font-awesome', name: 'lock' }}
           value={this.state.password}
         />
-        <Button 
+        <Button
           raised
-          title="Sign Up" 
+          title="Sign Up"
           buttonStyle = {{
             backgroundColor: 'tomato'
           }}
@@ -82,6 +82,6 @@ const styles = StyleSheet.create({
     marginTop: 100
   },
   butt_login: {
-    marginBottom: 150,    
+    marginBottom: 150,
   }
 })
