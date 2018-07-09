@@ -9,7 +9,7 @@ export default class Experiences_edit extends Component {
   static navigationOptions = {
     title: 'me',
   };
-  state = { currentUser: null, data:null, uid:null }
+  state = { currentUser: null, data:null, uid:null}
   handleLogout = () => {
     firebase
       .auth()
@@ -46,25 +46,23 @@ export default class Experiences_edit extends Component {
             </View>
             <View>
               <Text style={{fontSize:20}}>
-                User: {currentUser && currentUser.email}
+                {this.state.data && this.state.data.name}
               </Text>
             </View>
           </View>
 
-          <View>
-            <Text style={{fontSize:20}}>
-              UID: {this.state.uid}
-            </Text>
-          </View>
 
           <View>
             <Button title="show experience" onPress={() => this.props.navigation.navigate('Experiences_show')} />
-          </View>
-          <View>
             <Button title="edit experience" onPress={() => this.props.navigation.navigate('markDownEditor')} />
+            <Button title="my profile" onPress={() => this.props.navigation.navigate('Profile')} />
+            <Button title="my Q&A" onPress={() => this.props.navigation.navigate('Experiences_show')} />
           </View>
           <View>
-            <Button title="my Q&A" onPress={() => this.props.navigation.navigate('Experiences_show')} />
+
+          </View>
+          <View>
+
           </View>
         </View>
 
@@ -82,7 +80,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+    padding:10,
   },
   userIcon: {
     justifyContent: 'center'
@@ -91,5 +91,13 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     justifyContent: 'space-between',
+  },
+  button:{
+    backgroundColor: "rgba(92, 1,1, 1)",
+    width: 300,
+    height: 30,
+    borderColor: "transparent",
+    borderWidth: 0,
+    borderRadius: 5
   }
 })
