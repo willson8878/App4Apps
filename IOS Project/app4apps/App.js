@@ -178,7 +178,7 @@ const me_control = createStackNavigator(
   Experiences_edit,
   Profile,
   markDownEditor,
-
+  Experiences
   }
 )
 //for me

@@ -83,7 +83,7 @@ export default class Experiences_edit extends Component {
               backgroundColor: 'tomato'
             }}
             title="my Q&A"
-            onPress={() => this.props.navigation.navigate('Experiences_show')} />
+            onPress={() => this.props.navigation.navigate('Experiences')} />
           </View>
         </View>
 

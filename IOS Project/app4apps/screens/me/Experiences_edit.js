@@ -5,7 +5,7 @@ import { Input, Button, Header,SearchBar } from 'react-native-elements';
 import firebase from 'firebase';
 import { MarkdownEditor } from 'react-native-markdown-editor';
 import { MarkdownView } from 'react-native-markdown-view'
-//mport HBRichTextEditor from 'react-native-richtext-editor/HBRichTextEditor';
+//import HBRichTextEditor from 'react-native-richtext-editor/HBRichTextEditor';
 
 export default class Experiences_edit extends Component {
   state = { currentUser: null, markDown:null, uid:null, data:null }
