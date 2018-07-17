@@ -6,7 +6,7 @@ import { Input, Button } from 'react-native-elements';
 import firebase from 'firebase';
 
 export default class SignUp extends React.Component {
-  state = { email: '', password: '', errorMessage: null }
+  state = { email: '', password: '', errorMessage: null, uid:null }
 handleSignUp = () => {
   // TODO: Firebase stuff...
   // const config={
@@ -21,7 +21,35 @@ handleSignUp = () => {
   firebase
       .auth()
       .createUserWithEmailAndPassword(this.state.email, this.state.password)
-      .then(() => this.props.navigation.navigate('me_Main'))
+      .then(() => {
+        var userID=firebase.auth().currentUser.uid;
+        this.setState({uid:userID});
+        var postData={
+          [this.state.uid]:{
+            exp:{
+              expDoc:"write something!",
+              expTitle:"need a title!",
+              expLike:0,
+              expDislike:0
+            },
+            profile:{
+              name:"please set your name in profile",
+              nationality:'please add your nationality information'
+            }
+
+          }
+        }
+        firebase
+          .database()
+          .ref()
+          .update({
+            //['expDoc2']:this.state.htmlDoc
+            ['users']:postData
+          });
+        this.props.navigation.navigate('me_Main')
+
+
+      })
       .catch(error => this.setState({ errorMessage: error.message }))
 }
 render() {

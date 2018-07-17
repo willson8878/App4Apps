@@ -162,8 +162,12 @@ import Login from './screens/login/Login'
 import Main from './screens/login/Main'
 import Schools from './screens/Schools'
 import Experiences from './screens/Experiences'
+import Verify from './screens/me/Verify'
 import Experiences_show from './screens/me/Experiences_show'
 import Experiences_edit from './screens/me/Experiences_edit'
+import Web_editor from './screens/me/Web_editor'
+import Experiences_edit_HTML from './screens/me/Experiences_edit_HTML'
+import Experiences_show_HTML from './screens/me/Experiences_show_HTML'
 import markDownEditor from './screens/me/markDownEditor'
 import Profile from './screens/me/Profile'
 import me_Main from './screens/me/me_Main'
@@ -176,9 +180,12 @@ const me_control = createStackNavigator(
   me_Main,
   Experiences_show,
   Experiences_edit,
+  Experiences_edit_HTML,
+  Experiences_show_HTML,
   Profile,
   markDownEditor,
-  Experiences
+  Verify,
+  Web_editor,
   }
 )
 //for me

@@ -7,14 +7,37 @@ import firebase from 'firebase';
 
 export default class Experiences_edit extends Component {
   static navigationOptions = {
-    title: 'me',
+    title: 'Verification',
   };
-  state = { currentUser: null, data:null, uid:null}
+  state = { currentUser: null, data:null, uid:null, verified:null}
   handleLogout = () => {
     firebase
       .auth()
       .signOut()
       .then(() => this.props.navigation.navigate('Login'))
+  }
+
+  verification=()=>{
+    // var actionCodeSettings = {
+    //   url: 'https://www.example.com/?email=' + firebase.auth().currentUser.email,
+    //   iOS: {
+    //     bundleId: 'com.example.ios'
+    //   },
+    //   android: {
+    //     packageName: 'com.example.android',
+    //     installApp: true,
+    //     minimumVersion: '12'
+    //   },
+    //   handleCodeInApp: true
+    // };
+
+    // firebase
+    //   .auth()
+    //   .currentUser
+    //   .sendEmailVerification()
+    //   .then(()=>this.setState({verified:"not edu mail"}),function(){})
+
+      this.setState({verified:"not edu mail"})
   }
 
   componentDidMount() {
@@ -23,13 +46,14 @@ export default class Experiences_edit extends Component {
     var userID=firebase.auth().currentUser.uid;
     this.setState({uid:userID});
     var database=firebase.database();
-    var fet=database.ref('users/'+userID)
+    var fet=database.ref('UID/'+userID)
                      .once('value')
                      .then((snapshot)=>{
                        this.setState({data:snapshot.val()});
                       })
                      .catch((error)=>{console.log(error);
                       });
+
   }
 
 
@@ -46,71 +70,38 @@ export default class Experiences_edit extends Component {
             </View>
             <View>
               <Text style={{fontSize:20}}>
-                {this.state.data && this.state.data.profile.name}
+                {this.state.data && this.state.data.name}
               </Text>
 
             </View>
           </View>
 
 
-
+          <Text style={{fontSize:20}}>
+            {this.state.currentUser && this.state.currentUser.uid}
+            {'\n'}
+            {this.state.currentUser && this.state.currentUser.email}
+            {'\n'}
+            {this.state.currentUser && this.state.currentUser.isAnonymous}
+            {'\n'}
+            {this.state.currentUser && this.state.currentUser.displayName}
+            {'\n'}
+            {this.state.currentUser && this.state.currentUser.isEmailVerified}
+            {'\n'}
+            {this.state.verified}
+          </Text>
 
           <View>
             <Button
             buttonStyle = {{
               backgroundColor: 'tomato'
             }}
-            title="my profile"
-            onPress={() => this.props.navigation.navigate('Profile')} />
+            title="Send email to verify"
+            onPress={this.verification} />
           </View>
-          <View>
-            <Button
-            buttonStyle = {{
-              backgroundColor: 'tomato'
-            }}
-            title="my experience"
-            onPress={() => this.props.navigation.navigate('Experiences_edit_HTML')} />
-          </View>
-          <View>
-            <Button
-            buttonStyle = {{
-              backgroundColor: 'tomato'
-            }}
-            title="verifying account"
-            onPress={() => this.props.navigation.navigate('Verify')} />
-          </View>
-          <View>
-            <Button
 
-                buttonStyle = {{
-                  backgroundColor: 'tomato'
-                }}
-                title="show experience (dep!)"
-                onPress={() => this.props.navigation.navigate('Experiences_show')} />
-          </View>
           <View>
-            <Button
-              buttonStyle = {{
-                backgroundColor: 'tomato'
-              }}
-              title="edit experience (dep!)"
-              onPress={() => this.props.navigation.navigate('markDownEditor')} />
-          </View>
-          <View>
-            <Button
-              buttonStyle = {{
-                backgroundColor: 'tomato'
-              }}
-              title="show experience (HTML)"
-              onPress={() => this.props.navigation.navigate('Experiences_show_HTML')} />
-          </View>
-          <View>
-            <Button
-              buttonStyle = {{
-                backgroundColor: 'tomato'
-              }}
-              title="WebView"
-              onPress={() => this.props.navigation.navigate('Web_editor')} />
+          <Text style={{fontSize:40}}> not verified </Text>
           </View>
         </View>
 

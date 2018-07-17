@@ -1,105 +1,89 @@
 import React, { Component } from 'react';
-import { Text, View, Platform, StyleSheet, TextInput} from 'react-native';
+import { Text, View, Platform, StyleSheet, TextInput, ListView, FlatList} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input, Button, Header,SearchBar } from 'react-native-elements';
+import { Input, Button, Header,SearchBar, ListItem } from 'react-native-elements';
 import firebase from 'firebase';
 //import HBRichTextEditor from 'react-native-richtext-editor';
 //import HBToolbar from 'react-native-richtext-editor/HBToolbar';
 
 //var HBRichTextEditor = require('react-native-richtext-editor');
 //var HBToolbar = require('react-native-richtext-editor/HBToolbar');
-import {RichTextEditor, RichTextToolbar} from 'react-native-zss-rich-text-editor';
+//import {RichTextEditor, RichTextToolbar} from 'react-native-zss-rich-text-editor';
 
 export default class Experiences extends Component {
-  state = { currentUser: null, htmlDoc:null, uid:null, data:null,htmlTitle:null }
-  static navigationOptions = {
-    title: 'test',
-  };
-
-  constructor(props) {
-  super(props);
-  this.getHTML = this.getHTML.bind(this);
-  this.setFocusHandlers = this.setFocusHandlers.bind(this);
+  constructor() {
+    super();
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+    this.state = {
+      dataSource: ds.cloneWithRows(['row 1', 'row 2']),
+      currentUser: null,
+      data:ds.cloneWithRows(['none']),
+      datashow:null,
+      uid:null,
+      jsondata:null
+    };
   }
 
-  markDownSubmit= () =>{
-    //var userID=firebase.auth().currentUser.uid;
-    const titleHtml =this.richtext.getTitleHtml();
-    const contentHtml =this.richtext.getContentHtml();
-    firebase
-      .database()
-      .ref('UID/'+this.state.uid)
-      .update({
-        ['expDoc2']:contentHtml
-      });
-  }
 
-  componentDidMount() {
-    const { currentUser } = firebase.auth()
-    this.setState({ currentUser })
-    var userID=firebase.auth().currentUser.uid;
-    this.setState({uid:userID});
-    var fet=firebase.database().ref('UID/'+userID)
-                     .once('value')
-                     .then((snapshot)=>{
-                       this.setState({data:snapshot.val(),htmlTitle:snapshot.val()['expTitle'],htmlDoc:snapshot.val()['expDoc2']});
-                      })
-                     .catch((error)=>{console.log(error);
-                      });
+    componentDidMount() {
+      var data=fetch('https://app4apps-c2117.firebaseio.com/users.json')
+                .then(response=>response.json())
+                .then((json)=>{
+                  this.setState({jsondata:json})
+                  console.log(json)
+                  var thisStr=JSON.stringify(json)
+                  console.log(thisStr)
+                  //var arr=thisStr.split(',')
+                  //console.log(arr)
+                  //console.log(typeof(arr))
+                  arr=[]
+                  for (const v in json){
+                    for (const v1 in json[v]){
+                      if (v1=='exp'){
+                        console.log(json[v][v1]['expTitle'])
+                        arr.push(json[v][v1]['expTitle'])
+                      }
+                     }
+                  }
 
-  }
+                  let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+                  var tmp=ds.cloneWithRows(arr)
+                  console.log(tmp)
+                  console.log(this.state.dataSource)
+                  this.setState({data:arr});
+                  //{this.state.data && this.state.data[0].name}
+                })
+    }
+
+
 
   render(){
     return (
-      <View style={styles.container}>
-          <RichTextEditor
-              enableOnChange={ true }
-              ref={(r)=>this.richtext = r}
-              style={styles.richText}
-              initialTitleHTML={this.state.htmlTitle}
-              initialContentHTML={this.state.htmlDoc}
-              editorInitializedCallback={() => this.onEditorInitialized()}
-          />
-          <RichTextToolbar
-            getEditor={() => this.richtext}
-          />
-          <Button
-             raised
-             title="save and submit"
-             buttonStyle = {{
-               backgroundColor: 'tomato'
-              }}
-              onPress={this.markDownSubmit}
-              />
-      </View>
-      //<View>
-      // <HBRichTextEditor>
-      // </HBRichTextEditor>
-      // <HBToolbar />
-      // </View>
+      <View>
+      <Header
+        centerComponent={{ text: 'EXPERIENCES', style: { color: '#fff' },  fontSize: 10}}
+        backgroundColor = 'tomato' />
+      <FlatList
+        style = {styles.list }
+        data={this.state.data}
 
+        renderItem={({ item }) =>
+          <ListItem
+            title={`${item}` }
+            containerStyle={{ borderBottomWidth: 0 }}
+            rightIcon={{name: 'chevron-right' }}
+            onpress={()=>{console.log('click')}}
+          />
+        }
+        ItemSeparatorComponent={this.renderSeparator}
+
+
+      />
+      </View>
     );
   }
 
-  onEditorInitialized() {
-    this.setFocusHandlers();
-    this.getHTML();
-  }
-
-  async getHTML() {
-    const titleHtml = await this.richtext.getTitleHtml();
-    const contentHtml = await this.richtext.getContentHtml();
-    //alert(titleHtml + ' ' + contentHtml)
-  }
-
-  setFocusHandlers() {
-    this.richtext.setTitleFocusHandler(() => {
-      //alert('title focus');
-    });
-    this.richtext.setContentFocusHandler(() => {
-      //alert('content focus');
-    });
-  }
 }
 
 const styles = StyleSheet.create({
@@ -114,4 +98,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
+  list: {
+    marginBottom: 190,
+  },
+  searchButt:{
+    marginTop:10,
+    marginLeft:2
+  },
+  dropDown:{
+  }
 });
