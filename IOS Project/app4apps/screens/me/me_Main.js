@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View,StyleSheet } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import {Icon} from 'react-native-elements';
 import { Input, Button, Header,SearchBar } from 'react-native-elements';
 import firebase from 'firebase';
@@ -8,7 +8,12 @@ import firebase from 'firebase';
 export default class Experiences_edit extends Component {
   static navigationOptions = {
     title: 'me',
+    headerStyle: {
+      backgroundColor: 'tomato',
+    },
+    headerTintColor: '#fff',
   };
+
   state = { currentUser: null, data:null, uid:null}
   handleLogout = () => {
     firebase

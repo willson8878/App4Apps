@@ -20,25 +20,12 @@ export default class Experiences extends Component {
       data:ds.cloneWithRows(['none']),
       datashow:null,
       uid:null,
-      jsondata:['row 1', 'row 2'],
-      result:['none']
+      jsondata:null
     };
   }
 
-  static navigationOptions = {
-    title: 'Experiences',
-    headerStyle: {
-      backgroundColor: 'tomato',
-    },
-    headerTintColor: '#fff',
-  };
-
-  navigateToUser=(uid,name)=>{
-    //console.log(uid)
-    this.props.navigation.navigate('otherUserMain',{
-      thisUID:uid,
-      thisName:name
-    })
+  navigateToUser=()=>{
+    this.props.navigation.navigate('me_Main')
   }
 
   componentDidMount() {
@@ -46,72 +33,51 @@ export default class Experiences extends Component {
                 .then(response=>response.json())
                 .then((json)=>{
                   this.setState({jsondata:json})
-                  //console.log(json)
+                  console.log(json)
                   var thisStr=JSON.stringify(json)
-                  //console.log(thisStr)
-                  //console.log(typeof(thisStr))
+                  console.log(thisStr)
+                  //var arr=thisStr.split(',')
+                  //console.log(arr)
+                  //console.log(typeof(arr))
                   arr=[]
-                  result=[]
                   for (const v in json){
-                    result.push([v,json[v]['exp']['expTitle'],json[v]['profile']['name']])
-                    //console.log(v)
-                    //console.log(json[v]['exp']['expDoc'])
-
                     for (const v1 in json[v]){
                       if (v1=='exp'){
-                        //console.log(json[v][v1]['expTitle'])
+                        console.log(json[v][v1]['expTitle'])
                         arr.push(json[v][v1]['expTitle'])
                       }
                      }
                   }
-                  //console.log(result)
-                  this.setState({data:arr,result:result});
 
+                  let ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
+
+                  var tmp=ds.cloneWithRows(arr)
+                  console.log(tmp)
+                  console.log(this.state.dataSource)
+                  this.setState({data:arr});
+                  //{this.state.data && this.state.data[0].name}
                 })
     }
 
 
 
-  // render(){
-  //   return (
-  //     <View>
-  //     <FlatList
-  //       style = {styles.list }
-  //       data={this.state.data}
-  //
-  //       renderItem={({ item }) =>
-  //         <ListItem
-  //           title={`${item}` }
-  //           containerStyle={{ borderBottomWidth: 0 }}
-  //           rightIcon={{name: 'chevron-right' }}
-  //           onPress={this.navigateToUser}
-  //         />
-  //       }
-  //       ItemSeparatorComponent={this.renderSeparator}
-  //
-  //
-  //     />
-  //     </View>
-  //   );
-  // }
-
-
   render(){
     return (
       <View>
+      <Header
+        centerComponent={{ text: 'EXPERIENCES', style: { color: '#fff' },  fontSize: 10}}
+        backgroundColor = 'tomato' />
       <FlatList
         style = {styles.list }
-        data={this.state.result}
+        data={this.state.data}
 
         renderItem={({ item }) =>
-
           <ListItem
-            title={`${item[1]}` }
+            title={`${item}` }
             containerStyle={{ borderBottomWidth: 0 }}
             rightIcon={{name: 'chevron-right' }}
-            onPress={()=>this.navigateToUser(item[0],item[2])}
+            onPress={()=>{console.log('click')}}
           />
-
         }
         ItemSeparatorComponent={this.renderSeparator}
 

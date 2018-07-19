@@ -47,8 +47,6 @@ handleSignUp = () => {
             ['users']:postData
           });
         this.props.navigation.navigate('me_Main')
-
-
       })
       .catch(error => this.setState({ errorMessage: error.message }))
 }

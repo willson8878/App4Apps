@@ -5,15 +5,15 @@ import firebase from 'firebase';
 
 export default class Loading extends React.Component {
   componentDidMount(){
-    const config={
-          apiKey: "AIzaSyAGQKdIZv-AmRP2MJi2kjVs5ZHIlpaDIA8",
-          authDomain: "app4apps-c2117.firebaseapp.com",
-          databaseURL: "https://app4apps-c2117.firebaseio.com",
-          projectId: "app4apps-c2117",
-          storageBucket: "app4apps-c2117.appspot.com",
-          messagingSenderId: "838478544202"
-        };
-    firebase.initializeApp(config);
+    // const config={
+    //       apiKey: "AIzaSyAGQKdIZv-AmRP2MJi2kjVs5ZHIlpaDIA8",
+    //       authDomain: "app4apps-c2117.firebaseapp.com",
+    //       databaseURL: "https://app4apps-c2117.firebaseio.com",
+    //       projectId: "app4apps-c2117",
+    //       storageBucket: "app4apps-c2117.appspot.com",
+    //       messagingSenderId: "838478544202"
+    //     };
+    // firebase.initializeApp(config);
     firebase.auth().onAuthStateChanged(user=>{
       this.props.navigation.navigate(user? 'me_Main' : 'Login')
     })

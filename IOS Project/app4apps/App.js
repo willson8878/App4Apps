@@ -171,6 +171,10 @@ import Experiences_show_HTML from './screens/me/Experiences_show_HTML'
 import markDownEditor from './screens/me/markDownEditor'
 import Profile from './screens/me/Profile'
 import me_Main from './screens/me/me_Main'
+import otherUserMain from './screens/experience/otherUserMain'
+import otherUserExp from './screens/experience/otherUserExp'
+import otherUserProfile from './screens/experience/otherUserProfile'
+import chat from './screens/experience/chat'
 // create our app's navigation stack
 
 
@@ -202,11 +206,21 @@ const Apps = createSwitchNavigator(
   }
 )
 
+const experience_control = createStackNavigator(
+  {
+    Experiences,
+    otherUserExp,
+    otherUserProfile,
+    otherUserMain,
+    chat,
+    login2:{screen: Apps}
+  }
+)
 
 //tab
 export const App = createBottomTabNavigator({
-  Schools: {screen: Schools,},
-  Experiences: {screen: Experiences},
+  Schools: {screen: Schools},
+  Experiences: {screen: experience_control},
   Me: {screen: Apps},
 },
 {

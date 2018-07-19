@@ -14,6 +14,10 @@ export default class Experiences extends Component {
   state = { currentUser: null, htmlDoc:null, uid:null, data:null,htmlTitle:null }
   static navigationOptions = {
     title: 'My experiences',
+    headerStyle: {
+      backgroundColor: 'tomato',
+    },
+    headerTintColor: '#fff',
   };
 
   constructor(props) {

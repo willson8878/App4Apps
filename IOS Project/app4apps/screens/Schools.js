@@ -2,61 +2,76 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, FlatList, Picker } from 'react-native';
 import { SearchBar, Header,List, ListItem, Button } from 'react-native-elements';
 import { Dropdown } from 'react-native-material-dropdown';
+import firebase from 'firebase';
 
 export default class Schools extends Component {
-  
+
+  componentDidMount(){
+
+    //schools.js is first page once open the app, initialize the firebase here
+    const config={
+          apiKey: "AIzaSyAGQKdIZv-AmRP2MJi2kjVs5ZHIlpaDIA8",
+          authDomain: "app4apps-c2117.firebaseapp.com",
+          databaseURL: "https://app4apps-c2117.firebaseio.com",
+          projectId: "app4apps-c2117",
+          storageBucket: "app4apps-c2117.appspot.com",
+          messagingSenderId: "838478544202"
+        };
+    firebase.initializeApp(config);
+  }
+
   state = {
     data: [],
     school_name: '',
     statesList: [
       {value: "AL"},
-      {value: "AK"}, 
-      {value: "AZ"}, 
-      {value: "AR"}, 
-      {value: "CA"}, 
-      {value: "CO"}, 
-      {value: "CT"}, 
-      {value: "DE"}, 
-      {value: "FL"}, 
-      {value: "GA"}, 
-      {value: "HI"}, 
-      {value: "ID"}, 
-      {value: "IL"}, 
-      {value: "IN"}, 
-      {value: "A"}, 
-      {value: "KS"}, 
-      {value: "KY"}, 
-      {value: "LA"}, 
-      {value: "ME"}, 
-      {value: "MD"}, 
-      {value: "MA"}, 
-      {value: "MI"}, 
-      {value: "MN"}, 
-      {value: "MS"}, 
-      {value: "MO"}, 
-      {value: "MT"}, 
-      {value: "NE"}, 
-      {value: "NH"}, 
-      {value: "NJ"}, 
-      {value: "NM"}, 
-      {value: "NY"}, 
-      {value: "NC"}, 
-      {value: "ND"}, 
-      {value: "OH"}, 
-      {value: "OK"}, 
-      {value: "OR"}, 
-      {value: "PA"}, 
-      {value: "RI"}, 
-      {value: "SC"}, 
-      {value: "SD"}, 
-      {value: "TN"}, 
-      {value: "TX"}, 
-      {value: "UT"}, 
-      {value: "VT"}, 
-      {value: "VA"}, 
-      {value: "WA"}, 
-      {value: "WV"}, 
-      {value: "WI"}, 
+      {value: "AK"},
+      {value: "AZ"},
+      {value: "AR"},
+      {value: "CA"},
+      {value: "CO"},
+      {value: "CT"},
+      {value: "DE"},
+      {value: "FL"},
+      {value: "GA"},
+      {value: "HI"},
+      {value: "ID"},
+      {value: "IL"},
+      {value: "IN"},
+      {value: "A"},
+      {value: "KS"},
+      {value: "KY"},
+      {value: "LA"},
+      {value: "ME"},
+      {value: "MD"},
+      {value: "MA"},
+      {value: "MI"},
+      {value: "MN"},
+      {value: "MS"},
+      {value: "MO"},
+      {value: "MT"},
+      {value: "NE"},
+      {value: "NH"},
+      {value: "NJ"},
+      {value: "NM"},
+      {value: "NY"},
+      {value: "NC"},
+      {value: "ND"},
+      {value: "OH"},
+      {value: "OK"},
+      {value: "OR"},
+      {value: "PA"},
+      {value: "RI"},
+      {value: "SC"},
+      {value: "SD"},
+      {value: "TN"},
+      {value: "TX"},
+      {value: "UT"},
+      {value: "VT"},
+      {value: "VA"},
+      {value: "WA"},
+      {value: "WV"},
+      {value: "WI"},
       {value: "WY"}
       ],
     state_name:'',
@@ -113,7 +128,7 @@ export default class Schools extends Component {
     const json = await response.json();
     this.setState({ data: json.results });
   };
-  
+
   renderSeparator = () => {
     return (
       <View
@@ -122,7 +137,7 @@ export default class Schools extends Component {
     );
   };
 
-  
+
   render(){
       return (
         <View>
@@ -138,7 +153,7 @@ export default class Schools extends Component {
           onChangeText={school_name => this.setState({ school_name })}
           />
 
-        <View 
+        <View
         style={{ flexDirection: 'row'}}
         >
           <View style={{ width: 120, marginLeft: 10}}>
@@ -164,20 +179,20 @@ export default class Schools extends Component {
           </View>
 
           <View >
-          <Button 
+          <Button
               style = {styles.searchButt}
               raised
               buttonStyle = {{
                 backgroundColor: 'tomato'
               }}
               icon={{name: 'search', size: 50}}
-              title='' 
+              title=''
               onPress = {this.fetchData}
             />
           </View>
 
         </View>
-      
+
 
         <FlatList
           style = {styles.list }
@@ -189,14 +204,14 @@ export default class Schools extends Component {
             subtitle={"Location: "+`${item['school.city']}` +", " +  `${item['school.state']}`}
             containerStyle={{ borderBottomWidth: 0 }}
             rightIcon={{name: 'chevron-right' }}
-            
+
             />
           }
           keyExtractor={item => item.id}
           ItemSeparatorComponent={this.renderSeparator}
         />
 
-          
+
       </View>
       );
   }

@@ -5,6 +5,13 @@ import { Input, Button, Header,SearchBar } from 'react-native-elements';
 import firebase from 'firebase';
 
 export default class Profile extends Component {
+  static navigationOptions = {
+    title: 'my profile',
+    headerStyle: {
+      backgroundColor: 'tomato',
+    },
+    headerTintColor: '#fff',
+  };
   state = { currentUser: null, uid:null, data:null, name:null, nationality:null }
 
   updateProfile=()=>{
