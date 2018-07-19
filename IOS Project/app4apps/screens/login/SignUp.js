@@ -44,7 +44,7 @@ handleSignUp = () => {
           .ref()
           .update({
             //['expDoc2']:this.state.htmlDoc
-            ['users/'+userID]:postData
+            ['users/' + userID]:postData
           });
         this.props.navigation.navigate('me_Main')
       })

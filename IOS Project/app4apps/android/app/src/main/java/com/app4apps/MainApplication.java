@@ -3,6 +3,9 @@ package com.app4apps;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativenavigation.NavigationReactPackage;
+import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
+import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -24,6 +27,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new NavigationReactPackage(),
+            new WebViewBridgePackage(),
+            new WebViewBridgePackage(),
             new VectorIconsPackage()
       );
     }
