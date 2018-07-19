@@ -50,6 +50,7 @@ handleSignUp = () => {
       })
       .catch(error => this.setState({ errorMessage: error.message }))
 }
+
 render() {
     return (
       <View style={styles.container}>

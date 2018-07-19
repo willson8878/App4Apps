@@ -7,18 +7,18 @@ import { GiftedChat } from 'react-native-gifted-chat'
 export default class chat extends Component {
   state = {
     messages: [],
-    myuid= null,
-    currentUser: null,
-    uid:this.props.navigation.getParam('thisUID','fGaeYIYQ6Z1PWFOPT4GGPiEvqe2'),
-    name:this.props.navigation.getParam('thisName','None')
+    //myuid= null,
+    //currentUser: null,
+    //uid:this.props.navigation.getParam('thisUID','fGaeYIYQ6Z1PWFOPT4GGPiEvqe2'),
+    //name:this.props.navigation.getParam('thisName','None')
   }
 
   componentDidMount() {
-    const { currentUser } = firebase.auth()
-    this.setState({ currentUser })
-    var id1_userID=firebase.auth().currentUser.uid;
-    var id2_userID=this.state.uid;
-    this.setState({myuid:userID});
+    // const { currentUser } = firebase.auth()
+    // this.setState({ currentUser })
+    // var id1_userID=firebase.auth().currentUser.uid;
+    // var id2_userID=this.state.uid;
+    // this.setState({myuid:userID});
     this.setState({
           messages: [
             {
@@ -36,20 +36,20 @@ export default class chat extends Component {
   }
 
   dofirebase=()=>{
-    firebase
-      .database()
-      .ref('users/'+this.state.uid+'/exp')
-      .update({
-        ['expTitle']:this.state.htmlTitle,
-        ['expDoc']:this.state.htmlDoc
-      });
-    firebase
-      .database()
-      .ref('users/'+this.state.uid+'/exp')
-      .update({
-        ['expTitle']:this.state.htmlTitle,
-        ['expDoc']:this.state.htmlDoc
-      });
+    // firebase
+    //   .database()
+    //   .ref('users/'+this.state.uid+'/exp')
+    //   .update({
+    //     ['expTitle']:this.state.htmlTitle,
+    //     ['expDoc']:this.state.htmlDoc
+    //   });
+    // firebase
+    //   .database()
+    //   .ref('users/'+this.state.uid+'/exp')
+    //   .update({
+    //     ['expTitle']:this.state.htmlTitle,
+    //     ['expDoc']:this.state.htmlDoc
+    //   });
   }
 
   onSend(messages = []) {
