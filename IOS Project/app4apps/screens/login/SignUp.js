@@ -24,27 +24,27 @@ handleSignUp = () => {
       .then(() => {
         var userID=firebase.auth().currentUser.uid;
         this.setState({uid:userID});
-        var postData={
-          [this.state.uid]:{
-            exp:{
-              expDoc:"write something!",
-              expTitle:"need a title!",
-              expLike:0,
-              expDislike:0
-            },
-            profile:{
-              name:"please set your name in profile",
-              nationality:'please add your nationality information'
-            }
 
+        var postData={
+          exp:{
+            expDoc:"write something!",
+            expTitle:"need a title!",
+            expLike:0,
+            expDislike:0
+          },
+          profile:{
+            name:"please set your name in profile",
+            nationality:'please add your nationality information'
           }
         }
+
+
         firebase
           .database()
           .ref()
           .update({
             //['expDoc2']:this.state.htmlDoc
-            ['users']:postData
+            ['users/'+userID]:postData
           });
         this.props.navigation.navigate('me_Main')
       })
