@@ -35,6 +35,12 @@ handleSignUp = () => {
           profile:{
             name:"please set your name in profile",
             nationality:'please add your nationality information'
+          },
+          contactList:{
+            0:{
+              name:'none',
+              uid:'none'
+            }
           }
         }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View,StyleSheet, TextInput, WebView } from 'react-native';
+import { Text, View,StyleSheet, TextInput, WebView, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, Header,SearchBar } from 'react-native-elements';
 import firebase from 'firebase';
@@ -28,6 +28,8 @@ export default class Profile extends Component {
     firebase.database()
             .ref()
             .update(updates)
+            .then(()=>{Alert.alert('succeed')})
+
   }
 
 

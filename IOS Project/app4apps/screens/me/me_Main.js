@@ -37,6 +37,21 @@ export default class Experiences_edit extends Component {
                       });
   }
 
+  // componentWillMount() {
+  //   const { currentUser } = firebase.auth()
+  //   this.setState({ currentUser })
+  //   var userID=firebase.auth().currentUser.uid;
+  //   this.setState({uid:userID});
+  //   var database=firebase.database();
+  //   var fet=database.ref('users/'+userID)
+  //                    .once('value')
+  //                    .then((snapshot)=>{
+  //                      this.setState({data:snapshot.val()});
+  //                     })
+  //                    .catch((error)=>{console.log(error);
+  //                     });
+  // }
+
 
   render(){
     const { currentUser } = this.state;
@@ -116,6 +131,14 @@ export default class Experiences_edit extends Component {
               }}
               title="WebView"
               onPress={() => this.props.navigation.navigate('Web_editor')} />
+          </View>
+          <View>
+            <Button
+              buttonStyle = {{
+                backgroundColor: 'tomato'
+              }}
+              title="ContactList"
+              onPress={() => this.props.navigation.navigate('contactList')} />
           </View>
         </View>
 
