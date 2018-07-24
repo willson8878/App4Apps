@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View,StyleSheet, TextInput, WebView, Alert } from 'react-native';
+import { Text, View,StyleSheet, TextInput, WebView, Alert, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input, Button, Header,SearchBar } from 'react-native-elements';
+import { Input, Button, Header,SearchBar} from 'react-native-elements';
 import firebase from 'firebase';
 
 export default class Profile extends Component {
@@ -55,18 +55,19 @@ export default class Profile extends Component {
     const { currentUser } = this.state;
     const { navigate } = this.props.navigation;
     return (
-      <View>
-        <Text>
-          My profile page
-        </Text>
-
+      <View style={styles.container}>
+        <Text style={styles.text}>name</Text>
+        <View style={styles.input}>
         <Input
           placeholder={this.state.data && this.state.data.profile.name}
           autoCapitalize="none"
-          style={styles.textInput}
+          style={styles.pinInputStyle}
           onChangeText={txt => this.setState({name:txt})}
           value={this.state.name}
         />
+        </View>
+        <Text style={styles.text}>nationality</Text>
+        <View style={styles.input}>
         <Input
           placeholder={this.state.data && this.state.data.profile.nationality}
           autoCapitalize="none"
@@ -74,9 +75,11 @@ export default class Profile extends Component {
           onChangeText={txt => this.setState({nationality:txt})}
           value={this.state.nationality}
         />
+        </View>
         <Button
+          style={styles.button}
           raised
-          title="update my profile"
+          title="Submit"
           buttonStyle = {{
             backgroundColor: 'tomato'
           }}
@@ -89,7 +92,23 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
+
+    backgroundColor: '#F5FCFF',
+    padding:5,
+  },
+  input:{
+    alignItems: 'center',
+  },
+  text:{
+    fontFamily: 'Iowan Old Style',
+    fontWeight: 'bold',
+    fontSize: 25,
+    textAlign: 'left',
+    paddingLeft:20
+  },
+  button: {
+    marginTop: 50,
+  },
+  pinInputStyle:{
+  },
 })

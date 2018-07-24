@@ -150,7 +150,6 @@ const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
   );
 });
 
-
 renderSeparator = () => {
   return (
     <View

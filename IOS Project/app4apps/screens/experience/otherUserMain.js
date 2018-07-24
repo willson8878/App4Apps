@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet, Alert} from 'react-native';
+import { Text, View, TextInput, StyleSheet, Alert, Image} from 'react-native';
 import { Icon, Input, Button, Header,SearchBar, ListItem } from 'react-native-elements';
 import firebase from 'firebase';
 
@@ -115,19 +115,21 @@ export default class otherUserMain extends Component {
       <View style={styles.main_view}>
 
         <View>
-          <View style={{flexDirection: 'row'}}>
+          <View style={{flexDirection: 'row',padding:20}}>
             <View>
-              <Icon name='face' size={50}/>
+            <Image  source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/app4apps-c2117.appspot.com/o/profile_images%2Favatar.jpeg?alt=media&token=04c5e227-8efa-4bf5-a48d-fe7e6c29e7ee' }}
+                          style={{width: 40, height: 40}}
+            />
             </View>
             <View>
-              <Text style={{fontSize:20}}>
+              <Text style={{fontSize:30,paddingLeft:20}}>
                 {this.state.data && this.state.data.profile.name}
               </Text>
 
             </View>
           </View>
 
-          <View>
+          <View style={styles.list}>
             <Button
             buttonStyle = {{
               backgroundColor: 'tomato'
@@ -136,7 +138,7 @@ export default class otherUserMain extends Component {
             onPress={() => this.navigateToUserProfile(this.state.uid,this.state.name)} />
           </View>
 
-          <View>
+          <View style={styles.list}>
             <Button
               buttonStyle = {{
                 backgroundColor: 'tomato'
@@ -145,7 +147,7 @@ export default class otherUserMain extends Component {
               onPress={() => this.navigateToUserExp(this.state.uid,this.state.name)} />
           </View>
 
-          <View>
+          <View style={styles.list}>
             <Button
               buttonStyle = {{
                 backgroundColor: 'tomato'
@@ -194,5 +196,8 @@ const styles = StyleSheet.create({
     borderColor: "transparent",
     borderWidth: 0,
     borderRadius: 5
+  },
+  list:{
+    paddingBottom:2
   }
 })
