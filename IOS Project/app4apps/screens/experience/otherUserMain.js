@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import { Text, View, TextInput, StyleSheet} from 'react-native';
+import { Text, View, TextInput, StyleSheet, Alert} from 'react-native';
 import { Icon, Input, Button, Header,SearchBar, ListItem } from 'react-native-elements';
 import firebase from 'firebase';
 
 export default class otherUserMain extends Component {
 
   state = { currentUser: null,
-            data:null,
+            myuid: null,
+            data: null,
             uid:this.props.navigation.getParam('thisUID','fGaeYIYQ6Z1PWFOPT4GGPiEvqe2'),
             name:this.props.navigation.getParam('thisName','None')
           }
@@ -46,8 +47,54 @@ export default class otherUserMain extends Component {
     })
   }
 
-  componentDidMount() {
+  addContactList=(uid,name)=>{
 
+    var fet=firebase.database().ref('users/'+this.state.myuid+'/contactList')
+                     .once('value')
+                     .then((snapshot)=>{
+                       //this.setState({data:snapshot.val()});
+                       var mydata=snapshot.val()
+                       if (mydata[0]['name']=='none'){
+                         mydata[0]['name']=name
+                         mydata[0]['uid']=uid
+                       }else{
+                         var sign=true
+                         mydata.forEach((thisUID)=>{
+                           if (thisUID['uid']==uid){
+                             sign = false
+                           }
+                         })
+                         var post={name:null,uid:null}
+                         post.name=name
+                         post.uid=uid
+                         if (sign){mydata.push(post)}
+                       }
+
+                       firebase
+                        .database()
+                        .ref()
+                        .update({
+                          ['users/'+this.state.myuid+'/contactList']:mydata
+                        })
+
+                      })
+                     .catch((error)=>{console.log(error);
+                      });
+
+    // firebase
+    //   .database()
+    //   .ref('users/'+this.state.myuid+'/contactList')
+    //   .update({
+    //     [this.state.uid]:messages,
+    //   });
+    Alert.alert('successful')
+  }
+
+  componentDidMount() {
+    const { currentUser } = firebase.auth()
+    this.setState({ currentUser })
+    var id1_userID=firebase.auth().currentUser.uid;
+    this.setState({myuid:id1_userID});
     var userID=this.state.uid;
     //console.log(this.state.uid)
     var database=firebase.database();
@@ -109,6 +156,14 @@ export default class otherUserMain extends Component {
 
         </View>
 
+        <View>
+          <Button
+          buttonStyle = {{
+            backgroundColor: 'tomato'
+          }}
+          title="add to my contact list"
+          onPress={()=>this.addContactList(this.state.uid,this.state.name)} />
+        </View>
 
       </View>
     );

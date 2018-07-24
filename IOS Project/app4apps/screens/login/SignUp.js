@@ -24,21 +24,27 @@ handleSignUp = () => {
       .then(() => {
         var userID=firebase.auth().currentUser.uid;
         this.setState({uid:userID});
-        var postData={
-          [this.state.uid]:{
-            exp:{
-              expDoc:"write something!",
-              expTitle:"need a title!",
-              expLike:0,
-              expDislike:0
-            },
-            profile:{
-              name:"please set your name in profile",
-              nationality:'please add your nationality information'
-            }
 
+        var postData={
+          exp:{
+            expDoc:"write something!",
+            expTitle:"need a title!",
+            expLike:0,
+            expDislike:0
+          },
+          profile:{
+            name:"please set your name in profile",
+            nationality:'please add your nationality information'
+          },
+          contactList:{
+            0:{
+              name:'none',
+              uid:'none'
+            }
           }
         }
+
+
         firebase
           .database()
           .ref()
@@ -50,6 +56,7 @@ handleSignUp = () => {
       })
       .catch(error => this.setState({ errorMessage: error.message }))
 }
+
 render() {
     return (
       <View style={styles.container}>
