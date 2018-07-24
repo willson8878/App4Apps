@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, Platform, StyleSheet, TextInput, ListView, FlatList, Alert, Image} from 'react-native';
+import { Text, View, Platform, StyleSheet, TextInput, Alert, ListView, FlatList, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Input, Button, Header,SearchBar, ListItem } from 'react-native-elements';
+import { Input, Button, Header,SearchBar, ListItem, List, Avatar } from 'react-native-elements';
 import firebase from 'firebase';
 //import Swipeable from 'react-native-swipeable';
 
-export default class ContactList extends Component {
+export default class messageBox extends Component {
   constructor() {
     super();
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
@@ -16,12 +16,13 @@ export default class ContactList extends Component {
       datashow:null,
       uid:null,
       jsondata:['row 1', 'row 2'],
-      result:null
+      result:null,
+      messageUser:null
     };
   }
 
   static navigationOptions = {
-    title: 'Contact list',
+    title: 'Message Box',
     headerStyle: {
       backgroundColor: 'tomato',
     },
@@ -36,35 +37,46 @@ export default class ContactList extends Component {
     })
   }
 
+  navigateToUserChat=(uid,name)=>{
+    //console.log(uid)
+    this.props.navigation.navigate('chat',{
+      thisUID:uid,
+      thisName:name
+    })
+  }
+
   componentDidMount() {
     const { currentUser } = firebase.auth()
     this.setState({ currentUser })
     var userID=firebase.auth().currentUser.uid;
     this.setState({uid:userID});
     var database=firebase.database();
-    var a='a'
-    var b='b'
-    var fet=database.ref('users/'+userID+'/contactList')
+
+    var fet=database.ref('users/')
                      .once('value')
                      .then((snapshot)=>{
-                       this.setState({result:snapshot.val()});
-                       var list=snapshot.val()
-                       var result=[]
-                       if (list[0]['name']=='none'){
-                         result=null
-                         this.setState({result})
-                         Alert.alert('no info')
-                         //pass
-                       }
-                       else{
-                         for (var v in list){
-                           //Alert.alert(v)
+                       //console.log(snapshot.val())
+                       for (v in snapshot.val()){
+                         if (v==userID){
+                           allChat=snapshot.val()[v]['chat']
+                           users=[]
+                           for (v in allChat){
+                             users.push(v)
+                           }
+                           names=[]
+                           messageUser=[]
+                           //console.log(users)
+                           for (v in users){
+                             user=users[v]
+                             //console.log(snapshot.val()[user]['profile']['name'])
+                             messageUser.push([user,snapshot.val()[user]['profile']['name']])
+                           }
+                           this.setState({messageUser:messageUser})
+                           //console.log(messageUser)
+
                          }
                        }
-
                       })
-
-
                      .catch((error)=>{console.log(error);
                       });
 
@@ -75,31 +87,38 @@ export default class ContactList extends Component {
   render(){
     return (
       <View style={styles.container}>
+
       <FlatList
         style = {styles.list }
-        data={this.state.result}
+        data={this.state.messageUser}
 
         renderItem={({ item }) =>
         <View style={styles.list}>
           <ListItem
             roundAvatar
             leftAvatar={<Image  source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/app4apps-c2117.appspot.com/o/profile_images%2Favatar.jpeg?alt=media&token=04c5e227-8efa-4bf5-a48d-fe7e6c29e7ee' }}
-                          style={{width: 40, height: 40}}
+                            style={{width: 40, height: 40}}
             />}
-            title={`${item['name']}` }
+            title={`${item[1]}`}
             containerStyle={{ borderBottomWidth: 0 }}
             rightIcon={{name: 'chevron-right' }}
-            onPress={()=>this.navigateToUser(item['uid'],item['name'])}
+            onPress={()=>this.navigateToUserChat(item[0],item[1])}
           />
         </View>
         }
+
         ItemSeparatorComponent={this.renderSeparator}
 
 
       />
+
       </View>
     );
   }
+
+
+
+
 
 }
 

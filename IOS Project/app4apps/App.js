@@ -170,6 +170,7 @@ import Experiences_edit_HTML from './screens/me/Experiences_edit_HTML'
 import Experiences_show_HTML from './screens/me/Experiences_show_HTML'
 import markDownEditor from './screens/me/markDownEditor'
 import Profile from './screens/me/Profile'
+import messageBox from './screens/me/messageBox'
 import contactList from './screens/me/contactList'
 import me_Main from './screens/me/me_Main'
 import otherUserMain from './screens/experience/otherUserMain'
@@ -195,7 +196,8 @@ const me_control = createStackNavigator(
   otherUserMain,
   otherUserExp,
   otherUserProfile,
-  chat
+  chat,
+  messageBox
   }
 )
 //for me
