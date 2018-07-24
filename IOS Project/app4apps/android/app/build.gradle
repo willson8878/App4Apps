@@ -137,6 +137,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-node')
     compile project(':react-native-navigation')
     compile project(':react-native-webview-bridge-updated')
     compile project(':react-native-webview-bridge')

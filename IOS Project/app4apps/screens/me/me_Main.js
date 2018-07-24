@@ -140,6 +140,14 @@ export default class Experiences_edit extends Component {
               title="ContactList"
               onPress={() => this.props.navigation.navigate('contactList')} />
           </View>
+          <View>
+            <Button
+              buttonStyle = {{
+                backgroundColor: 'tomato'
+              }}
+              title="messageBox"
+              onPress={() => this.props.navigation.navigate('messageBox')} />
+          </View>
         </View>
 
 

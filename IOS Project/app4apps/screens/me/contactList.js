@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Platform, StyleSheet, TextInput, ListView, FlatList, Alert} from 'react-native';
+import { Text, View, Platform, StyleSheet, TextInput, ListView, FlatList, Alert, Image} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, Header,SearchBar, ListItem } from 'react-native-elements';
 import firebase from 'firebase';
@@ -74,20 +74,24 @@ export default class ContactList extends Component {
 
   render(){
     return (
-      <View>
+      <View style={styles.container}>
       <FlatList
         style = {styles.list }
         data={this.state.result}
 
         renderItem={({ item }) =>
-
+        <View style={styles.list}>
           <ListItem
+            roundAvatar
+            leftAvatar={<Image  source={{ uri: 'https://firebasestorage.googleapis.com/v0/b/app4apps-c2117.appspot.com/o/profile_images%2Favatar.jpeg?alt=media&token=04c5e227-8efa-4bf5-a48d-fe7e6c29e7ee' }}
+                          style={{width: 40, height: 40}}
+            />}
             title={`${item['name']}` }
             containerStyle={{ borderBottomWidth: 0 }}
             rightIcon={{name: 'chevron-right' }}
             onPress={()=>this.navigateToUser(item['uid'],item['name'])}
           />
-
+        </View>
         }
         ItemSeparatorComponent={this.renderSeparator}
 
@@ -103,21 +107,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
-    backgroundColor: '#ffffff',
-    paddingTop: 40
-  },
-  richText: {
-    alignItems:'center',
-    justifyContent: 'center',
-    backgroundColor: 'transparent',
+
   },
   list: {
-    marginBottom: 190,
+    paddingTop: 2
   },
-  searchButt:{
-    marginTop:10,
-    marginLeft:2
-  },
-  dropDown:{
-  }
+
 });

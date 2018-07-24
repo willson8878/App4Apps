@@ -3,6 +3,7 @@ package com.app4apps;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.staltz.reactnativenode.RNNodePackage;
 import com.reactnativenavigation.NavigationReactPackage;
 import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
@@ -27,6 +28,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNNodePackage(),
             new NavigationReactPackage(),
             new WebViewBridgePackage(),
             new WebViewBridgePackage(),

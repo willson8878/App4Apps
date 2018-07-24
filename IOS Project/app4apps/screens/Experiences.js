@@ -3,6 +3,10 @@ import { Text, View, Platform, StyleSheet, TextInput, ListView, FlatList} from '
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button, Header,SearchBar, ListItem } from 'react-native-elements';
 import firebase from 'firebase';
+import { InstantSearch } from 'react-instantsearch-native';
+import {   connectSearchBox ,connectInfiniteHits } from 'react-instantsearch-native';
+import { withNavigation } from 'react-navigation';
+
 //import HBRichTextEditor from 'react-native-richtext-editor';
 //import HBToolbar from 'react-native-richtext-editor/HBToolbar';
 
@@ -34,7 +38,7 @@ export default class Experiences extends Component {
   };
 
   navigateToUser=(uid,name)=>{
-    //console.log(uid)
+    // console.log(uid)
     this.props.navigation.navigate('otherUserMain',{
       thisUID:uid,
       thisName:name
@@ -70,58 +74,90 @@ export default class Experiences extends Component {
                 })
     }
 
-
-
-  // render(){
-  //   return (
-  //     <View>
-  //     <FlatList
-  //       style = {styles.list }
-  //       data={this.state.data}
-  //
-  //       renderItem={({ item }) =>
-  //         <ListItem
-  //           title={`${item}` }
-  //           containerStyle={{ borderBottomWidth: 0 }}
-  //           rightIcon={{name: 'chevron-right' }}
-  //           onPress={this.navigateToUser}
-  //         />
-  //       }
-  //       ItemSeparatorComponent={this.renderSeparator}
-  //
-  //
-  //     />
-  //     </View>
-  //   );
-  // }
-
-
   render(){
     return (
       <View>
-      <FlatList
-        style = {styles.list }
-        data={this.state.result}
 
-        renderItem={({ item }) =>
-
-          <ListItem
-            title={`${item[1]}` }
-            containerStyle={{ borderBottomWidth: 0 }}
-            rightIcon={{name: 'chevron-right' }}
-            onPress={()=>this.navigateToUser(item[0],item[2])}
-          />
-
-        }
-        ItemSeparatorComponent={this.renderSeparator}
+      <InstantSearch
+          appId="1WT5B2KKV8"
+          apiKey="c8aa603392f7ef683fa3ae0e83b32dc8"
+          indexName="app4apps_firebase" >
+           <SearchBox />
+          <Hits/>
+      
+      </InstantSearch>
 
 
-      />
       </View>
     );
   }
 
 }
+
+const Hits = connectInfiniteHits(({ hits, hasMore, refine }) => {
+  /* if there are still results, you can
+  call the refine function to load more */
+  const onEndReached = function() {
+    if (hasMore) {
+      refine();
+    }
+  };
+
+  return (
+    <FlatList
+      data={hits}
+      onEndReached={onEndReached}
+      style = {styles.list }
+      keyExtractor={(item, index) => item.objectID}
+      renderItem={({ item }) => {
+        return(
+        <ListItem
+          title={`${item.exp.expTitle}` }
+          subtitle={"Auther: "+`${item.profile.name}`}
+          containerStyle={{ borderBottomWidth: 0 }}
+          rightIcon={{name: 'chevron-right' }}
+          onPress={()=>this.navigateToUser(item.objectID,item.profile.name)}
+        />
+      );
+      }}
+      ItemSeparatorComponent={this.renderSeparator}
+    
+    />
+  );
+});
+
+
+const SearchBox = connectSearchBox(({ refine, currentRefinement }) => {
+
+  const styles = {
+    height: 60,
+    borderWidth: 1,
+    padding: 10,
+    margin: 10,
+    flex: 1,
+  };
+
+  return (
+
+    <SearchBar
+    round
+    lightTheme
+    placeholder='Search a key word...'
+    Icon={{ type: 'font-awesome', name: 'search' } }
+    onChangeText={text => refine(text)}
+    value={currentRefinement}
+    />
+  );
+});
+
+
+renderSeparator = () => {
+  return (
+    <View
+      style={{height: 1,  backgroundColor: "#CED0CE",}}
+    />
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -145,3 +181,4 @@ const styles = StyleSheet.create({
   dropDown:{
   }
 });
+

@@ -95,7 +95,7 @@ render() {
             backgroundColor: 'tomato'
           }}
           style={styles.butt_login}
-          title="Already have an account? Login"
+          title="Already have an account?"
           onPress={() => this.props.navigation.navigate('Login')}
         />
       </View>
