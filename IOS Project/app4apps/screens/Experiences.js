@@ -104,14 +104,14 @@ export default class Experiences extends Component {
         data={this.state.result}
 
         renderItem={({ item }) =>
-
+        <View style={styles.list}>
           <ListItem
             title={`${item[1]}` }
             containerStyle={{ borderBottomWidth: 0 }}
             rightIcon={{name: 'chevron-right' }}
             onPress={()=>this.navigateToUser(item[0],item[2])}
           />
-
+        </View>
         }
         ItemSeparatorComponent={this.renderSeparator}
 
@@ -135,13 +135,13 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: 'transparent',
   },
-  list: {
-    marginBottom: 190,
-  },
   searchButt:{
     marginTop:10,
     marginLeft:2
   },
   dropDown:{
-  }
+  },
+  list: {
+    paddingTop: 2
+  },
 });

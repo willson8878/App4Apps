@@ -37,19 +37,19 @@ export default class otherUserExp extends Component {
   render(){
     return (
       <View>
-        <Text>
+        <Text style={styles.text}>
         name:
         </Text>
 
-        <Text>
+        <Text style={styles.text}>
         {this.state.data && this.state.data.profile.name}
         </Text>
 
-        <Text>
+        <Text style={styles.text}>
         nationality:
         </Text>
 
-        <Text>
+        <Text style={styles.text}>
         {this.state.data && this.state.data.profile.nationality}
         </Text>
 
@@ -64,5 +64,12 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  text:{
+    fontFamily: 'Iowan Old Style',
+    fontWeight: 'bold',
+    fontSize: 25,
+    textAlign: 'left',
+    paddingLeft:20
   }
 })
